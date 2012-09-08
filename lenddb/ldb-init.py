@@ -18,9 +18,13 @@ def init_db(dburl):
 
     print 'Authenticating'
     cred = get_credentials()
-    auth_filter = BasicAuth(*cred)
 
-    db = Database(dburl, filters=[auth_filter])
+    if cred:
+        filters = [BasicAuth(*cred)]
+    else:
+        filters = []
+
+    db = Database(dburl, filters=filters)
     server = db.server
 
     try:
@@ -37,6 +41,9 @@ def init_db(dburl):
 def get_credentials():
     import getpass
     username = raw_input('Username: ')
+    if not username:
+        return False
+
     password = getpass.getpass('Password: ')
     return username, password
 

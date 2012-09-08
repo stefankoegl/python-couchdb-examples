@@ -16,7 +16,7 @@ def create_item(username, itemname, kwargs):
     thing = Thing(owner=username, name=itemname)
 
     for key, value in kwargs.items():
-        thing.key = value
+        setattr(thing, key, value)
 
     thing.save()
 
