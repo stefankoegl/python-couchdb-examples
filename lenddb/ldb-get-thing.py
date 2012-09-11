@@ -6,9 +6,6 @@
 #   ./new-thing.py name [key1=val2 [key2=val2 [...]]]
 #
 
-from couchdbkit import Database
-from couchdbkit.exceptions import ResourceNotFound
-
 from models import Thing
 
 
