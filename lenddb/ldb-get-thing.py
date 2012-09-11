@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-
-# This program is used to create a new empty database
+#
+# This program is part of then "lenddb" Python CouchdB example
+# It demonstrates how to fetch an object by its _id
 #
 # Synopsis
-#   ./new-thing.py name [key1=val2 [key2=val2 [...]]]
+#   ./ldb-get-thing.py <_id>
 #
 
 from models import Thing

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-
-# This program is used to create a new empty database
+#
+# This program is part of then "lenddb" Python CouchdB example
+# It demonstrates how to synchronize design docs from the filesystem
 #
 # Synopsis
-#   ./ldb-init.py
+#   ./ldb-sync-ddocs.py
 #
 
 

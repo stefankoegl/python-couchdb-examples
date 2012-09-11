@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-
-# This program is used to create a new empty database
+#
+# This program is part of then "lenddb" Python CouchdB example
+# It demonstrates how to access a view
 #
 # Synopsis
-#   ./new-thing.py name [key1=val2 [key2=val2 [...]]]
+#   ./new-list-things.py
 #
 
 from models import Thing

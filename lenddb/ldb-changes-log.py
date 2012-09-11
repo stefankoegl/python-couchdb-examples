@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+#
+# This program is part of then "lenddb" Python CouchdB example
+# It demonstrates how to use the _changes feed
+#
+# Synopsis
+#   ./ldb-changes-log.py [since-value]
+#
 
 from couchdbkit import Consumer, Database
 
