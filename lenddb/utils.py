@@ -17,3 +17,16 @@ def get_credentials():
 
     password = getpass.getpass('Password: ')
     return [BasicAuth(username, password)]
+
+
+def doc_repr(self):
+    """ procudes a repr for a Document with dynamic properties """
+
+    return '{cls}({properties})'.format(
+            cls        = self.__class__.__name__,
+            properties = ', '.join(
+                '{k}={v}'.format(k=key, v=repr(getattr(self, key)))
+                for key in self.all_properties().keys()
+            )
+        )
+
