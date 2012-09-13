@@ -14,7 +14,7 @@ from couchdbkit import Database
 from couchdbkit.loaders import FileSystemDocsLoader
 
 
-def init_db(dburl):
+def sync_ddocs(dburl):
     cred = get_credentials()
     auth_filter = BasicAuth(*cred)
     db = Database(dburl, filters=[auth_filter])
@@ -32,4 +32,4 @@ def get_credentials():
 
 if __name__ == '__main__':
     from settings import DB_URL
-    init_db(DB_URL)
+    sync_ddocs(DB_URL)
