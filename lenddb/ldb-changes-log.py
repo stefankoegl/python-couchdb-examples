@@ -32,7 +32,7 @@ def callback(line):
         # we also have other types of documents - _design docs
         return
 
-    print '{:5d}  {:s}'.format(seq, obj)
+    print '{:5d}  {:s}  {:s}'.format(seq, line['id'], obj)
 
 
 if __name__ == '__main__':

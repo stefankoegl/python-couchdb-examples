@@ -7,9 +7,6 @@
 #   ./ldb-lend-thing.py <thing_id> <to_username>
 #
 
-from datetime import datetime
-
-from couchdbkit import Database
 from couchdbkit.exceptions import ResourceNotFound
 
 from models import Thing, Lending
@@ -23,7 +20,7 @@ def lend_thing(username, thing_id, to_user):
         print 'Thing not found'
         return
 
-    lending = Lending(thing=thing_id, user=username, to_user=to_user)
+    lending = Lending(thing=thing_id, owner=username, to_user=to_user)
     lending.save()
 
     print lending, 'saved with _id', lending._id
