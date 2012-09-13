@@ -20,8 +20,8 @@ def replication_status(db_url):
     server = db.server
 
     # print a nice header
-    header = '{:35s} => {:35s} {:5s} {:5s}%'.format('Source', 'Target',
-            'Written', 'Progress')
+    header = '{:>10s} {:35s} => {:35s} {:>5s} {:>6s}'.format('Id', 'Source',
+            'Target', 'Docs', 'Prog.')
     print header
     print '=' * len(header)
 
@@ -32,7 +32,8 @@ def replication_status(db_url):
         if task.get('type', None) != 'replication':
             continue
 
-        print '{:35s} => {:35s} {:5d} {:5d}%'.format(
+        print '{:>10s} {:35s} => {:35s} {:5d} {:5d}%'.format(
+                task.get('doc_id', ''),
                 task.get('source', ''),
                 task.get('target', ''),
                 task.get('docs_written', 0),
@@ -52,10 +53,14 @@ def replication_status(db_url):
             continue
 
         doc = result['doc']
+
+        # all active (non-error) replication tasks have already been printed
+        # above; we're only interested in those that failed
         if doc.get('_replication_state', None) != 'error':
             continue
 
-        print '{:35s} => {:35s} {:>12s}'.format(
+        print '{:>10s} {:35s} => {:35s} {:>12s}'.format(
+                result['id'],
                 doc.get('source', ''),
                 doc.get('target', ''),
                 doc.get('_replication_state', '')
