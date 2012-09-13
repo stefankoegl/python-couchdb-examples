@@ -8,15 +8,14 @@
 #
 
 
-from restkit import BasicAuth
-
 from couchdbkit import Database
+
+from utils import get_credentials
 
 
 def replication_status(db_url):
-    cred = get_credentials()
-    auth_filter = BasicAuth(*cred)
-    db = Database(db_url, filters=[auth_filter])
+    auth_filters = get_credentials()
+    db = Database(db_url, filters=auth_filters)
     server = db.server
 
     # print a nice header
@@ -65,14 +64,6 @@ def replication_status(db_url):
                 doc.get('target', ''),
                 doc.get('_replication_state', '')
             )
-
-
-
-def get_credentials():
-    import getpass
-    username = raw_input('Username: ')
-    password = getpass.getpass('Password: ')
-    return username, password
 
 
 if __name__ == '__main__':

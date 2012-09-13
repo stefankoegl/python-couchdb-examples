@@ -8,22 +8,17 @@
 #
 
 
-from restkit import BasicAuth
-
 from couchdbkit import Database
 from couchdbkit.exceptions import ResourceNotFound
+
+from utils import get_credentials
 
 
 def init_db(dburl):
     print 'Initializing', dburl
 
     print 'Authenticating'
-    cred = get_credentials()
-
-    if cred:
-        filters = [BasicAuth(*cred)]
-    else:
-        filters = []
+    filters = get_credentials()
 
     db = Database(dburl, filters=filters)
     server = db.server
@@ -37,16 +32,6 @@ def init_db(dburl):
 
     db = server.get_or_create_db(db.dbname)
     print 'Created', db.dbname
-
-
-def get_credentials():
-    import getpass
-    username = raw_input('Username: ')
-    if not username:
-        return False
-
-    password = getpass.getpass('Password: ')
-    return username, password
 
 
 if __name__ == '__main__':

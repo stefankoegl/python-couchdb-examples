@@ -8,26 +8,18 @@
 #
 
 
-from restkit import BasicAuth
-
 from couchdbkit import Database
 from couchdbkit.loaders import FileSystemDocsLoader
 
+from utils import get_credentials
+
 
 def sync_ddocs(dburl):
-    cred = get_credentials()
-    auth_filter = BasicAuth(*cred)
-    db = Database(dburl, filters=[auth_filter])
+    auth_filters = get_credentials()
+    db = Database(dburl, filters=auth_filters)
 
     loader = FileSystemDocsLoader('_design')
     loader.sync(db, verbose=True)
-
-
-def get_credentials():
-    import getpass
-    username = raw_input('Username: ')
-    password = getpass.getpass('Password: ')
-    return username, password
 
 
 if __name__ == '__main__':

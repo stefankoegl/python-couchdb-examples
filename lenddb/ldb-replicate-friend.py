@@ -8,16 +8,15 @@
 #
 
 
-from restkit import BasicAuth
-
 from couchdbkit import Database
 from couchdbkit.exceptions import ResourceNotFound
 
+from utils import get_credentials
+
 
 def replicate(db_url, friend_name, friend_db_url):
-    cred = get_credentials()
-    auth_filter = BasicAuth(*cred)
-    db = Database(db_url, filters=[auth_filter])
+    auth_filters = get_credentials()
+    db = Database(db_url, filters=auth_filters)
     replicator_db = db.server['_replicator']
 
     # this describes the replication task
@@ -40,13 +39,6 @@ def replicate(db_url, friend_name, friend_db_url):
 
     # we store the replication task, which will automatically start it
     replicator_db[friend_name] = replication_doc
-
-
-def get_credentials():
-    import getpass
-    username = raw_input('Username: ')
-    password = getpass.getpass('Password: ')
-    return username, password
 
 
 if __name__ == '__main__':
