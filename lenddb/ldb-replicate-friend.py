@@ -38,7 +38,7 @@ def replicate(db_url, friend_name, friend_db_url):
         pass
 
     # we store the replication task, which will automatically start it
-    replicator_db[friend_name] = replication_doc
+    replicator_db[username + "-" + friend_name] = replication_doc
 
 
 if __name__ == '__main__':
